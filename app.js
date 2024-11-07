@@ -6,6 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var artifactsRouter = require('./routes/artifacts'); 
+var gridRouter = require('./routes/grid');
+var pickRouter = require('./routes/pick');
+
+
 
 var app = express();
 
@@ -18,9 +23,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/artifacts', artifactsRouter); 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/grid', gridRouter);
+app.use('/randomitem', pickRouter);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
